@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C70FAB23-C252-40E3-A598-0F136F37B7B5}|Api\\Api.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\api\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C70FAB23-C252-40E3-A598-0F136F37B7B5}|Api\\Api.csproj|solutionrelative:api\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\core\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|solutionrelative:core\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\domin\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|solutionrelative:domin\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\domin\\dtos\\budgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|solutionrelative:domin\\dtos\\budgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\domin\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|solutionrelative:domin\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F833F9EF-F801-4124-96D1-F2CAA62351FB}|Infrastructure\\Infrastructure.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\infrastructure\\migrations\\20250510220719_adduseridtotransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F833F9EF-F801-4124-96D1-F2CAA62351FB}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250510220719_adduseridtotransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F833F9EF-F801-4124-96D1-F2CAA62351FB}|Infrastructure\\Infrastructure.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\infrastructure\\interfaces\\itransactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -47,18 +67,6 @@
       "RelativeMoniker": "D:0:0:{C70FAB23-C252-40E3-A598-0F136F37B7B5}|Api\\Api.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\core\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|solutionrelative:core\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\domin\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|solutionrelative:domin\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\domin\\dtos\\budgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DA5DE2FB-5DBB-42D8-9C91-8F9B600BC705}|Domin\\Domin.csproj|solutionrelative:domin\\dtos\\budgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|c:\\users\\sagdafathy\\source\\repos\\smartbudgetmanager\\cloudproject\\core\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{58F03930-4BEC-4B0B-B7F7-94F33877B99F}|Core\\Core.csproj|solutionrelative:core\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -91,32 +99,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20250510220719_AddUserIdToTransaction.cs",
-              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
-              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
-              "RelativeToolTip": "Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Api\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\ReportController.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Api\\Controllers\\ReportController.cs*",
+              "RelativeToolTip": "Api\\Controllers\\ReportController.cs*",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBYAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T22:07:20.141Z",
+              "WhenOpened": "2025-05-11T01:56:25.467Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TokenService.cs",
-              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\TokenService.cs",
-              "RelativeDocumentMoniker": "Core\\Services\\TokenService.cs",
-              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\TokenService.cs",
-              "RelativeToolTip": "Core\\Services\\TokenService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ReportService.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\ReportService.cs",
+              "RelativeDocumentMoniker": "Core\\Services\\ReportService.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\ReportService.cs",
+              "RelativeToolTip": "Core\\Services\\ReportService.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T22:02:08.698Z",
+              "WhenOpened": "2025-05-10T17:31:09.054Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "TransactionRepository.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Implements\\TransactionRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Implements\\TransactionRepository.cs",
@@ -124,12 +132,11 @@
               "RelativeToolTip": "Infrastructure\\Implements\\TransactionRepository.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAmwCYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T22:00:20.734Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T22:00:20.734Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "ITransactionRepository.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Interfaces\\ITransactionRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Interfaces\\ITransactionRepository.cs",
@@ -137,12 +144,62 @@
               "RelativeToolTip": "Infrastructure\\Interfaces\\ITransactionRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T22:00:01.464Z",
+              "WhenOpened": "2025-05-10T22:00:01.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ReportDto.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\ReportDto.cs",
+              "RelativeDocumentMoniker": "Domin\\DTOs\\ReportDto.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\ReportDto.cs",
+              "RelativeToolTip": "Domin\\DTOs\\ReportDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T17:30:41.556Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
+              "Title": "Report.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\Models\\Report.cs",
+              "RelativeDocumentMoniker": "Domin\\Models\\Report.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\Models\\Report.cs",
+              "RelativeToolTip": "Domin\\Models\\Report.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T23:23:30.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BudgetDto.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\BudgetDto.cs",
+              "RelativeDocumentMoniker": "Domin\\DTOs\\BudgetDto.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\BudgetDto.cs",
+              "RelativeToolTip": "Domin\\DTOs\\BudgetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T17:22:25.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250510220719_AddUserIdToTransaction.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250510220719_AddUserIdToTransaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T22:07:20.141Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Transaction.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\Models\\Transaction.cs",
               "RelativeDocumentMoniker": "Domin\\Models\\Transaction.cs",
@@ -150,12 +207,23 @@
               "RelativeToolTip": "Domin\\Models\\Transaction.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAcwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T12:27:28.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T12:27:28.915Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "Core\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\TokenService.cs",
+              "RelativeToolTip": "Core\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T22:02:08.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "TransactionService.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\TransactionService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\TransactionService.cs",
@@ -163,12 +231,11 @@
               "RelativeToolTip": "Core\\Services\\TransactionService.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAqwGUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T12:15:54.24Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T12:15:54.24Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "ITransactionService.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Interfaces\\ITransactionService.cs",
               "RelativeDocumentMoniker": "Core\\Interfaces\\ITransactionService.cs",
@@ -176,12 +243,11 @@
               "RelativeToolTip": "Core\\Interfaces\\ITransactionService.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAywBUAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T21:46:14.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T21:46:14.209Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "IWalletService.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Interfaces\\IWalletService.cs",
               "RelativeDocumentMoniker": "Core\\Interfaces\\IWalletService.cs",
@@ -189,12 +255,11 @@
               "RelativeToolTip": "Core\\Interfaces\\IWalletService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T21:59:38.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T21:59:38.161Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "TransactionDto.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\TransactionDto.cs",
               "RelativeDocumentMoniker": "Domin\\DTOs\\TransactionDto.cs",
@@ -202,12 +267,11 @@
               "RelativeToolTip": "Domin\\DTOs\\TransactionDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T21:47:53.84Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T21:47:53.84Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "WalletDto.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\WalletDto.cs",
               "RelativeDocumentMoniker": "Domin\\DTOs\\WalletDto.cs",
@@ -215,12 +279,11 @@
               "RelativeToolTip": "Domin\\DTOs\\WalletDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T21:57:15.995Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T21:57:15.995Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "CategoryService.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\CategoryService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\CategoryService.cs",
@@ -232,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "CategoryDto.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\CategoryDto.cs",
               "RelativeDocumentMoniker": "Domin\\DTOs\\CategoryDto.cs",
@@ -244,19 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "BudgetDto.cs",
-              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\BudgetDto.cs",
-              "RelativeDocumentMoniker": "Domin\\DTOs\\BudgetDto.cs",
-              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\BudgetDto.cs",
-              "RelativeToolTip": "Domin\\DTOs\\BudgetDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T17:22:25.973Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Api\\Program.cs",
               "RelativeDocumentMoniker": "Api\\Program.cs",
@@ -265,30 +316,6 @@
               "ViewState": "AgIAAHIAAAAAAAAAAAAAAHIAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-10T18:24:25.488Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ReportDto.cs",
-              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\ReportDto.cs",
-              "RelativeDocumentMoniker": "Domin\\DTOs\\ReportDto.cs",
-              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Domin\\DTOs\\ReportDto.cs",
-              "RelativeToolTip": "Domin\\DTOs\\ReportDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T17:30:41.556Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ReportService.cs",
-              "DocumentMoniker": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\ReportService.cs",
-              "RelativeDocumentMoniker": "Core\\Services\\ReportService.cs",
-              "ToolTip": "C:\\Users\\sagdafathy\\source\\repos\\SmartBudgetManager\\cloudProject\\Core\\Services\\ReportService.cs",
-              "RelativeToolTip": "Core\\Services\\ReportService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T17:31:09.054Z"
             }
           ]
         }

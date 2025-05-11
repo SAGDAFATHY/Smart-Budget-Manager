@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(ReportDto model)
+        public async Task<IActionResult> Add([FromBody] ReportDto model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

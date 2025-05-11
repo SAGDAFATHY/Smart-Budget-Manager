@@ -1,290 +1,609 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { BarChart3, PieChart, LineChart, Download, Calendar, Tag } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { Calendar, Download, FileText, Plus, RefreshCw, Search, Trash2, Edit } from "lucide-react"
 import DashboardLayout from "@/components/dashboard-layout"
-import { apiService } from "@/lib/api-service"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { DatePicker } from "@/components/ui/date-picker"
 import { useToast } from "@/hooks/use-toast"
+import { Skeleton } from "@/components/ui/skeleton"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+const apiService = {
+  reports: {
+    getAll: async () => {
+      const response = await fetch("/api/Report/GetAll")
+      if (!response.ok) throw new Error("Failed to fetch reports")
+      return response.json()
+    },
+    getById: async (id) => {
+      const response = await fetch(`/api/Report/GetById/${id}`)
+      if (!response.ok) throw new Error("Failed to fetch report")
+      return response.json()
+    },
+    getByUserId: async (userId) => {
+      const response = await fetch(`/api/Report/GetByUserId/${userId}`)
+      if (!response.ok) throw new Error("Failed to fetch user reports")
+      return response.json()
+    },
+    add: async (reportData) => {
+      const response = await fetch("/api/Report/Add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportData),
+      })
+      if (!response.ok) throw new Error("Failed to add report")
+      return response.json()
+    },
+    update: async (id, reportData) => {
+      const response = await fetch(`/api/Report/Update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reportData),
+      })
+      if (!response.ok) throw new Error("Failed to update report")
+      return response.json()
+    },
+    delete: async (id) => {
+      const response = await fetch(`/api/Report/Delete/${id}`, {
+        method: "DELETE",
+      })
+      if (!response.ok) throw new Error("Failed to delete report")
+      return response.json()
+    },
+  },
+}
 
 export default function ReportsPage() {
   const { toast } = useToast()
-  const [transactions, setTransactions] = useState([])
-  const [wallets, setWallets] = useState([])
-  const [categories, setCategories] = useState([])
+  const router = useRouter()
+  const [reports, setReports] = useState([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState("overview")
-  const [timeRange, setTimeRange] = useState("month")
-  const [selectedWallet, setSelectedWallet] = useState("all")
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedReport, setSelectedReport] = useState(null)
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+  const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+
+  const [formData, setFormData] = useState({
+    desctiption: "", // Note: Using 'desctiption' to match backend
+    from: new Date(),
+    to: new Date(),
+    userId: "",
+  })
 
   useEffect(() => {
-    fetchData()
+    const userId = localStorage.getItem("userId") || ""
+    setFormData((prev) => ({ ...prev, userId }))
+    fetchReports(userId)
   }, [])
 
-  const fetchData = async () => {
+  const fetchReports = async (userId) => {
     try {
       setLoading(true)
-
-      const userId = localStorage.getItem("userId")
-        // Fetch wallets
-          try {
-            const walletsResponse = await apiService.wallets.getAll()
-            let WalletData = []
-          console.log("Filtering Wallets for userId:",userId)
-            WalletData = walletsResponse.filter(
-            (Wallet) => Wallet.userId == userId || Wallet.userId == Number(userId),
-          )
-        console.log("Setting Wallets state with:", WalletData)
-        setWallets(WalletData || [])
-        } catch (err) {
-          console.warn("Could not load wallets:", err)
-          setWallets([])
-        }
-
-        // Fetch transactions
-        try {
-      setLoading(true)
-      const response = await apiService.transactions.getAll()
-      let transactionsData = []
-      // Ensure transactions is always an array
-      const userId = localStorage.getItem("userId")
-        console.log("Filtering transactions for userId:", userId)
-        transactionsData = response.filter(
-          (transaction) => transaction.userId === userId || transaction.userId === Number(userId),
-        )
+      const data = await apiService.reports.getByUserId(userId)
       
-
-      console.log("Setting transactions state with:", transactionsData)
-      setTransactions(transactionsData)
-          }catch (err) {
-          console.warn("Could not load transactions:", err)
-          setTransactions([])
-        }
-
-      // Fetch categories
-        try {
-        setLoading(true)
-        const userId = localStorage.getItem("userId")
-        const response = await apiService.categories.getAll()
-
-
-        const StringUserId =`${userId}`
-        console.log(response?.data)
-
-        const filteredCategories = (response?.data || []).filter(
-          category => category.userId === StringUserId
-        )
-
-        setCategories(filteredCategories)
-      } catch (err) {
-        console.warn("Could not load categories:", err)
-        setCategories([])
-      }
+      const reportsWithDates = data.map(report => ({
+        ...report,
+        from: new Date(report.from),
+        to: new Date(report.to)
+      }))
+      
+      setReports(Array.isArray(reportsWithDates) ? reportsWithDates : [])
     } catch (error) {
-      console.warn("Error fetching report data:", error)
-      // Only show toast for critical errors, not empty results
-      if (typeof error === "string" && (error.includes("connection") || error.includes("network"))) {
-        toast({
-          title: "Warning",
-          description: "Failed to load some report data. Reports may be incomplete.",
-          variant: "default",
-        })
-      }
+      console.error("Error fetching reports:", error)
+      toast({
+        title: "Error",
+        description: "Failed to load reports. Please try again.",
+        variant: "destructive",
+      })
     } finally {
       setLoading(false)
     }
   }
 
-  const getFilteredTransactions = () => {
-    
-    return transactions.filter((transaction: any) => {
-      const transactionDate = new Date(transaction.date)
-     
-      const matchesWallet = selectedWallet === "all" || transaction.walletId.toString() === selectedWallet
-      const matchesCategory =
-        selectedCategory === "all" ||
-        (selectedCategory === "0" && (!transaction.categoryId || transaction.categoryId === 0)) ||
-        transaction.categoryId?.toString() === selectedCategory
-      
-      return  matchesWallet && matchesCategory
-    })
-  }
+  const handleAddReport = async () => {
+    try {
+      if (!formData.desctiption || !formData.from || !formData.to || !formData.userId) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all required fields.",
+          variant: "destructive",
+        })
+        return
+      }
 
-  const calculateTotals = () => {
-    const filteredTransactions = getFilteredTransactions()
+      if (new Date(formData.to) < new Date(formData.from)) {
+        toast({
+          title: "Date Error",
+          description: "End date cannot be before start date.",
+          variant: "destructive",
+        })
+        return
+      }
 
-    const income = filteredTransactions
-      .filter((transaction: any) => 
-        transaction.type == 0
-    )
-      .reduce((sum: number, transaction: any) => sum + transaction.amount, 0)
-      
+      const payload = {
+        desctiption: formData.desctiption,
+        from: formData.from.toISOString(),
+        to: formData.to.toISOString(),
+        userId: formData.userId
+      }
 
-    const expenses = filteredTransactions
-      .filter((transaction: any) => transaction.type == 1)
-      .reduce((sum: number, transaction: any) => sum + transaction.amount, 0)
+      await apiService.reports.add(payload)
+      toast({
+        title: "Success",
+        description: "Report created successfully!",
+      })
 
-    return {
-      income,
-      expenses,
-      balance: income - expenses,
+      setFormData({
+        desctiption: "",
+        from: new Date(),
+        to: new Date(),
+        userId: formData.userId,
+      })
+      setIsAddDialogOpen(false)
+      fetchReports(formData.userId)
+    } catch (error) {
+      console.error("Error adding report:", error)
+      toast({
+        title: "Error",
+        description: "Failed to create report. Please try again.",
+        variant: "destructive",
+      })
     }
   }
 
-  const getExpensesByWallet = () => {
-    const filteredTransactions = getFilteredTransactions()
-    const walletExpenses: Record<string, number> = {}
+  const handleUpdateReport = async () => {
+    try {
+      if (!selectedReport || !formData.desctiption || !formData.from || !formData.to) {
+        toast({
+          title: "Validation Error",
+          description: "Please fill in all required fields.",
+          variant: "destructive",
+        })
+        return
+      }
 
-    filteredTransactions
-      .filter((transaction: any) => transaction.type === "Expense")
-      .forEach((transaction: any) => {
-        const walletId = transaction.walletId
-        const wallet = wallets.find((w: any) => w.id === walletId)
-        const walletName = wallet ? wallet.name : "Unknown Wallet"
+      if (new Date(formData.to) < new Date(formData.from)) {
+        toast({
+          title: "Date Error",
+          description: "End date cannot be before start date.",
+          variant: "destructive",
+        })
+        return
+      }
 
-        if (!walletExpenses[walletName]) {
-          walletExpenses[walletName] = 0
-        }
+      const payload = {
+        desctiption: formData.desctiption,
+        from: formData.from.toISOString(),
+        to: formData.to.toISOString(),
+        userId: formData.userId
+      }
 
-        walletExpenses[walletName] += transaction.amount
+      await apiService.reports.update(selectedReport.id, payload)
+      toast({
+        title: "Success",
+        description: "Report updated successfully!",
       })
 
-    return Object.entries(walletExpenses)
-      .map(([name, amount]) => ({ name, amount }))
-      .sort((a, b) => b.amount - a.amount)
-  }
-
-  const getExpensesByCategory = () => {
-    const filteredTransactions = getFilteredTransactions()
-    const categoryExpenses: Record<string, number> = {}
-
-    filteredTransactions
-      .filter((transaction: any) => transaction.type === "Expense")
-      .forEach((transaction: any) => {
-        const categoryId = transaction.categoryId || 0
-        const category = categories.find((c: any) => c.id === categoryId)
-        const categoryName = category ? category.name : "Uncategorized"
-
-        if (!categoryExpenses[categoryName]) {
-          categoryExpenses[categoryName] = 0
-        }
-
-        categoryExpenses[categoryName] += transaction.amount
+      setIsEditDialogOpen(false)
+      fetchReports(formData.userId)
+    } catch (error) {
+      console.error("Error updating report:", error)
+      toast({
+        title: "Error",
+        description: "Failed to update report. Please try again.",
+        variant: "destructive",
       })
-
-    return Object.entries(categoryExpenses)
-      .map(([name, amount]) => ({ name, amount }))
-      .sort((a, b) => b.amount - a.amount)
+    }
   }
 
-  const getWalletName = (walletId: number) => {
-    const wallet = wallets.find((w: any) => w.id === walletId)
-    return wallet ? wallet.name : "Unknown Wallet"
+  const handleDeleteReport = async (id) => {
+    try {
+      await apiService.reports.delete(id)
+      toast({
+        title: "Success",
+        description: "Report deleted successfully!",
+      })
+      fetchReports(formData.userId)
+    } catch (error) {
+      console.error("Error deleting report:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete report. Please try again.",
+        variant: "destructive",
+      })
+    }
   }
 
-  const getCategoryName = (categoryId: number) => {
-    const category = categories.find((c: any) => c.id === categoryId)
-    return category ? category.name : "Uncategorized"
+  const handleViewReport = async (report) => {
+    setSelectedReport(report)
+    setIsViewDialogOpen(true)
   }
 
-  const totals = calculateTotals()
-  const walletExpenses = getExpensesByWallet()
-  const categoryExpenses = getExpensesByCategory()
+  const handleEditReport = (report) => {
+    setSelectedReport(report)
+    setFormData({
+      desctiption: report.desctiption || "",
+      from: new Date(report.from),
+      to: new Date(report.to),
+      userId: report.userId,
+    })
+    setIsEditDialogOpen(true)
+  }
+
+  const filteredReports = reports.filter((report) =>
+    report.desctiption?.toLowerCase().includes(searchQuery.toLowerCase()),
+  )
+
+  const formatDateISO = (date) => {
+    try {
+      return new Date(date).toISOString()
+    } catch (error) {
+      console.error("Error formatting date:", error)
+      return "Invalid date"
+    }
+  }
+
+  const exportReportsToCsv = () => {
+    if (reports.length === 0) {
+      toast({
+        title: "Export Failed",
+        description: "No reports to export.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    const headers = ["ID", "Description", "From", "To", "Total Income", "Total Expense", "Net Balance"]
+    const csvContent = [
+      headers.join(","),
+      ...filteredReports.map((report) =>
+        [
+          report.id,
+          `"${report.desctiption?.replace(/"/g, '""') || ""}"`,
+          formatDateISO(report.from),
+          formatDateISO(report.to),
+          report.totalIncome,
+          report.totalExpense,
+          (report.totalIncome - report.totalExpense).toFixed(2),
+        ].join(","),
+      ),
+    ].join("\n")
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.setAttribute("href", url)
+    link.setAttribute("download", `reports_${new Date().toISOString()}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold tracking-tight">Reports</h1>
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
+      <div className="container mx-auto py-6 space-y-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Financial Reports</h1>
+            <p className="text-muted-foreground">Manage and analyze your financial reports</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Button onClick={() => fetchReports(formData.userId)} variant="outline" size="sm">
+              <RefreshCw className="mr-2 h-4 w-4" />
+              Refresh
+            </Button>
+            <Button onClick={exportReportsToCsv} variant="outline" size="sm">
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+              <DialogTrigger asChild>
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  New Report
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[500px]">
+                <DialogHeader>
+                  <DialogTitle>Create New Report</DialogTitle>
+                  <DialogDescription>Create a new financial report for a specific time period.</DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="description">Description</Label>
+                    <Textarea
+                      id="description"
+                      placeholder="Enter report description"
+                      value={formData.desctiption}
+                      onChange={(e) => setFormData({ ...formData, desctiption: e.target.value })}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="from">From Date</Label>
+                      <DatePicker
+                        id="from"
+                        date={formData.from}
+                        setDate={(date) => setFormData({ ...formData, from: date })}
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="to">To Date</Label>
+                      <DatePicker
+                        id="to"
+                        date={formData.to}
+                        setDate={(date) => setFormData({ ...formData, to: date })}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handleAddReport}>Create Report</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-4">
-          
-          <div className="flex items-center gap-2">
-            <Select value={selectedWallet} onValueChange={setSelectedWallet}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select wallet" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Wallets</SelectItem>
-                {wallets.map((wallet: any) => (
-                  <SelectItem key={wallet.id} value={wallet.id.toString()}>
-                    {wallet.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-center gap-2">
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                
-                {categories.map((category: any) => (
-                  <SelectItem key={category.id} value={category.id.toString()}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+        <div className="flex items-center gap-2">
+          <Search className="h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search reports..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="max-w-sm"
+          />
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-              <p className="mt-2 text-sm text-muted-foreground">Loading report data...</p>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div className="grid gap-4 md:grid-cols-3">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Income</CardTitle>
-                  <LineChart className="h-4 w-4 text-muted-foreground" />
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardHeader>
+                  <Skeleton className="h-6 w-1/3" />
+                  <Skeleton className="h-4 w-1/4" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-green-500">${totals.income.toFixed(2)}</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-                  <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-red-500">${totals.expenses.toFixed(2)}</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Net Balance</CardTitle>
-                  <PieChart className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className={`text-2xl font-bold ${totals.balance >= 0 ? "text-green-500" : "text-red-500"}`}>
-                    ${totals.balance.toFixed(2)}
+                  <div className="grid grid-cols-3 gap-4">
+                    <Skeleton className="h-20" />
+                    <Skeleton className="h-20" />
+                    <Skeleton className="h-20" />
                   </div>
                 </CardContent>
               </Card>
-            </div>
-
-           
-          </>
+            ))}
+          </div>
+        ) : filteredReports.length === 0 ? (
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center py-10">
+              <FileText className="h-12 w-12 text-muted-foreground mb-4" />
+              <h3 className="text-lg font-medium">No reports found</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                {searchQuery ? "Try a different search term or" : "Get started by"} creating a new report.
+              </p>
+              <Button className="mt-4" onClick={() => setIsAddDialogOpen(true)}>
+                <Plus className="mr-2 h-4 w-4" />
+                Create Report
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredReports.map((report) => (
+              <Card key={report.id} className="overflow-hidden">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg font-medium truncate">
+                    {report.desctiption || "Untitled Report"}
+                  </CardTitle>
+                  <CardDescription className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    {formatDateISO(report.from)} - {formatDateISO(report.to)}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pb-2">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground">Income</p>
+                      <p className="text-lg font-medium text-green-500">${report.totalIncome?.toFixed(2) || "0.00"}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground">Expenses</p>
+                      <p className="text-lg font-medium text-red-500">${report.totalExpense?.toFixed(2) || "0.00"}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <p className="text-sm text-muted-foreground">Net Balance</p>
+                    <p
+                      className={`text-lg font-medium ${
+                        report.totalIncome - report.totalExpense >= 0 ? "text-green-500" : "text-red-500"
+                      }`}
+                    >
+                      ${(report.totalIncome - report.totalExpense)?.toFixed(2) || "0.00"}
+                    </p>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between pt-2">
+                  <Button variant="ghost" size="sm" onClick={() => handleViewReport(report)}>
+                    View Details
+                  </Button>
+                  <div className="flex gap-1">
+                    <Button variant="ghost" size="icon" onClick={() => handleEditReport(report)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                          <Trash2 className="h-4 w-4 text-red-500" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete Report</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Are you sure you want to delete this report? This action cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => handleDeleteReport(report.id)}>
+                            Delete
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         )}
+
+        <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
+          <DialogContent className="sm:max-w-[600px]">
+            <DialogHeader>
+              <DialogTitle>Report Details</DialogTitle>
+            </DialogHeader>
+            {selectedReport && (
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-lg font-medium">{selectedReport.desctiption || "Untitled Report"}</h3>
+                  <p className="text-sm text-muted-foreground flex items-center gap-1 mt-1">
+                    <Calendar className="h-3 w-3" />
+                    {formatDateISO(selectedReport.from)} - {formatDateISO(selectedReport.to)}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-sm">Total Income</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-2xl font-bold text-green-500">
+                        ${selectedReport.totalIncome?.toFixed(2) || "0.00"}
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-sm">Total Expenses</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-2xl font-bold text-red-500">
+                        ${selectedReport.totalExpense?.toFixed(2) || "0.00"}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-sm">Net Balance</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p
+                      className={`text-2xl font-bold ${
+                        selectedReport.totalIncome - selectedReport.totalExpense >= 0
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
+                    >
+                      ${(selectedReport.totalIncome - selectedReport.totalExpense)?.toFixed(2) || "0.00"}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <div className="flex justify-end gap-2">
+                  <Button variant="outline" onClick={() => setIsViewDialogOpen(false)}>
+                    Close
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setIsViewDialogOpen(false);
+                      handleEditReport(selectedReport);
+                    }}
+                  >
+                    <Edit className="mr-2 h-4 w-4" />
+                    Edit
+                  </Button>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent className="sm:max-w-[500px]">
+            <DialogHeader>
+              <DialogTitle>Edit Report</DialogTitle>
+              <DialogDescription>Update the details of your financial report.</DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="edit-description">Description</Label>
+                <Textarea
+                  id="edit-description"
+                  placeholder="Enter report description"
+                  value={formData.desctiption}
+                  onChange={(e) => setFormData({ ...formData, desctiption: e.target.value })}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="edit-from">From Date</Label>
+                  <DatePicker
+                    id="edit-from"
+                    date={formData.from}
+                    setDate={(date) => setFormData({ ...formData, from: date })}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="edit-to">To Date</Label>
+                  <DatePicker
+                    id="edit-to"
+                    date={formData.to}
+                    setDate={(date) => setFormData({ ...formData, to: date })}
+                  />
+                </div>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleUpdateReport}>Update Report</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </DashboardLayout>
   )
